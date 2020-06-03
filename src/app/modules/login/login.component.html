@@ -1,0 +1,22 @@
+<form #form="ngForm">
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px;text-align: center; margin:auto; padding:5%">
+        <mat-card>
+            <h2 class="w3-wide"><b> Login</b></h2>
+            <p class="w3-opacity"><i>Enter your login credentials</i></p>
+            <div>
+                <mat-label>Email Address</mat-label>
+                <input  name="UserEmail" #UserEmail="ngModel" [(ngModel)]="formDataLogin.UserEmail" matInput placeholder="pat@example.com"   autocomplete="off" required>
+            </div>
+            <div>
+                <mat-label>Password</mat-label>
+                <input name="UserPassword" #UserPassword="ngModel" [(ngModel)]="formDataLogin.UserPassword" matInput required>   
+            </div>
+            <div>
+                <button style="text-align: center; font-size: medium; margin:20px" mat-raised-button type="button">Back</button>
+                <button style="text-align: center; font-size: medium; margin:20px" mat-raised-button (click)="Login(form)" type="button" [disabled]="form.invalid">Login</button>
+            </div>
+            <a style="color:blue" routerLink='/Register'>Dont have an account? Click here</a>
+        </mat-card>
+    </div>
+</form>
+

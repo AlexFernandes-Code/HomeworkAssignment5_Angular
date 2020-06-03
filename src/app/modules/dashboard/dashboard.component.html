@@ -1,0 +1,14 @@
+
+<div class="container">
+    <div *ngIf="barChartData" style="height: 100%; width: 100%;">
+        <canvas id="canvas" baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            [colors]="barChartColors">
+        </canvas>
+    </div>
+</div>  
+

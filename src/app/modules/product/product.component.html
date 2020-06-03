@@ -1,0 +1,26 @@
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off">
+            <mat-card>
+                <h2 class="w3-wide"><b>Products</b></h2>
+                <p class="w3-opacity"><i>All company Products</i></p>
+                    <table class="table table-hover">
+                        <th>ProductID</th>
+                        <th>Product Name</th>
+                        <th>Product Image</th>
+                        <th>Price (R)</th>
+                        <th>Quantity</th>    
+                            <tr *ngFor="let obj of listProduct">
+                            <td >{{obj.ProductID}}</td>
+                            <td >{{obj.ProductName}} </td>
+                            <td ><img style="width: 50px;height: 50px;" src={{obj.Image}}></td>
+                            <td >{{obj.Price}}</td>
+                            <td >{{obj.Quantity}}</td>           
+                        </tr>
+                    </table>                
+            </mat-card>
+        </form>
+    </div>
+</div>
+
