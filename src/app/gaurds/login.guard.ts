@@ -10,15 +10,16 @@ export class LoginGuard implements CanActivate {
   constructor (public service : DefaultService, public route: Router){}
 
   canActivate() {
-    this.service.isLoggedIn(this.service.User?.GUID);
-    if (this.service.validUser == false)
+    this.service.isLoggedIn(sessionStorage.getItem('accessToken'));
+    if (this.service.validUser == true)
     {
-      return true;     
+      this.route.navigate(['home']);
+      console.log('naaaaaaaaaaaaaah ' + this.service.validUser)
+      return false;       
     } 
     else{      
-      this.route.navigateByUrl('home');
-      console.log(this.service.User)
-      return false;
+      console.log('yaaaaaaaaaaaaaaah ' + this.service.validUser)
+      return true;  
     }
   }
   

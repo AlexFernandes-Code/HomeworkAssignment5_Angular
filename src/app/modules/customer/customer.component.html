@@ -1,7 +1,7 @@
 
-<div class="row">
+<div *ngIf="!showError" class="row">
     <div class="col">
-        <form autocomplete="off">
+        <form  autocomplete="off">
             <mat-card>
                 <h2 class="w3-wide"><b>Customers</b></h2>
                 <p class="w3-opacity"><i>All company Customers</i></p>
@@ -20,7 +20,16 @@
                         </tr>
                     </table>              
             </mat-card>
-        </form>
+        </form>        
+    </div>
+</div>
+
+<div *ngIf="showError" class="row">
+    <div class="col">
+            <mat-card>
+                <h2 class="w3-wide"><b>{{errorMessage}}</b></h2>      
+                <h3 class="w3-wide"><a style="color:blue" routerLink='/login'>Click here to login</a></h3>            
+            </mat-card>         
     </div>
 </div>
 

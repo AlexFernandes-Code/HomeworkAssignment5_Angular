@@ -1,10 +1,10 @@
 <mat-nav-list>
     <h2 matSubheader>Pages</h2>
     <mat-divider></mat-divider>    
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/home">Home</a> 
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/product">Products</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/supplier">Suppliers</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/customer">Customers</a> 
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/home" >Home</a> 
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/product" *ngIf='roleID == "2"'>Products</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/supplier" *ngIf="roleID == 2">Suppliers</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/customer" *ngIf="roleID == 2">Customers</a> 
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/order">Orders</a>
     <mat-divider></mat-divider> 
 </mat-nav-list>

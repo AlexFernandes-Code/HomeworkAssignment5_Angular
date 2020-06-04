@@ -14,24 +14,33 @@ export class DefaultService {
   sideBarOpen = false;
   constructor(private http: HttpClient,  public route: Router) { }
 
-  getCustomers()
+  getCustomers(guid: any)
   {   
-    return this.http.get(this.URL + '/getCustomers'); 
+    let myPar = new HttpParams().set('guid',guid);
+    return this.http.get(this.URL + '/getCustomers', {params:myPar}); 
   }
 
-  getSuppliers()
+  getSuppliers(guid: any)
   {   
-    return this.http.get(this.URL + '/getSuppliers'); 
+    let myPar = new HttpParams().set('guid',guid);
+    return this.http.get(this.URL + '/getSuppliers', {params:myPar}); 
   }
 
-  getProducts()
+  getProducts(guid: any)
   {   
-    return this.http.get(this.URL + '/getProducts'); 
+    let myPar = new HttpParams().set('guid',guid);
+    return this.http.get(this.URL + '/getProducts', {params:myPar});   
   }
 
-  getOrders()
+  getOrders(guid: any)
   {   
-    return this.http.get(this.URL + '/getOrders'); 
+    let myPar = new HttpParams().set('guid',guid);
+    return this.http.get(this.URL + '/getOrders', {params:myPar}); 
+  }
+
+  Register(formDataRegister : User)
+  {
+      return this.http.post(this.URL + '/Register/', formDataRegister);
   }
 
   User: User;
@@ -41,12 +50,14 @@ export class DefaultService {
     .then(res => this.User = res as User);  
   }
 
-  validUser: boolean;
+  validUser: any;
 
-  isLoggedIn(guid: any)
+  isLoggedIn(guid: string)
   {
     let myPar = new HttpParams().set('guid',guid);
-    return this.http.get(this.URL + '/isLoggedIn/' ,{params:myPar}).subscribe(res => this.validUser as boolean);
+    return this.http.get(this.URL + '/isLoggedIn/' ,{params:myPar}).toPromise()
+    .then(res => this.validUser as any)
+    .then(x => console.log("here: " + this.validUser))
   }
 
   Logout(guid)
@@ -55,11 +66,16 @@ export class DefaultService {
       return this.http.get(this.URL + '/Logout/',{params:myPar});
   }
 
-  updateDataInvoke = new EventEmitter();
-  subsVar: Subscription;
+  updateHeaderEmitter = new EventEmitter();
+  updateHeaderSub: Subscription;
+  updateHeader() {
+    this.updateHeaderEmitter.emit();
+  }
 
-  update() {
-    this.updateDataInvoke.emit();
+  updateSidebarEmitter = new EventEmitter();
+  updateSidebarSub: Subscription;
+  updateSidebar() {
+    this.updateSidebarEmitter.emit();
   }
 
   listDefaultData : ReportData[];
@@ -67,4 +83,19 @@ export class DefaultService {
   {  
     return this.http.get(this.URL + '/getReportData').toPromise().then(res=> this.listDefaultData = res as ReportData[]);
   }
+
+  GetTitles(){
+    return this.http.get(this.URL + '/getTitle');
+  }
+
+  GetGender(){
+    return this.http.get(this.URL + '/getGender');
+  }
+
+  GetUserTypes(){
+    return this.http.get(this.URL + '/getUserTypes');
+  }
+
+
+
 }

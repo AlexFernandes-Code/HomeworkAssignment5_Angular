@@ -10,7 +10,19 @@ export class SidebarComponent implements OnInit {
 
   constructor(public service: DefaultService) { }
 
+  roleID : any;
+
   ngOnInit(): void {
+    if (this.service.updateSidebarSub==undefined) {
+      this.service.updateSidebarSub = this.service.
+      updateSidebarEmitter.subscribe((name:string) => {
+        this.updateSidebar();
+      });
+    }
+  }
+
+  updateSidebar(){
+    this.roleID = localStorage.getItem('roleID')
   }
 
 }

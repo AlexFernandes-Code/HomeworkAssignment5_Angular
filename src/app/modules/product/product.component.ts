@@ -12,9 +12,22 @@ export class ProductComponent implements OnInit {
   constructor(public service: DefaultService) { }
 
   listProduct: Product[];
+  showError: boolean;
+  errorMessage: string;
 
   ngOnInit(): void {
-    this.service.getProducts().toPromise().then(res=> this.listProduct = res as Product[]);;
+    this.listProduct = null;
+    this.service.getProducts(sessionStorage.getItem('accessToken')).subscribe(
+      (res: any) => {        
+        if (res.Error)  {
+          this.errorMessage = res.Error;
+          this.showError = true; 
+        }     
+        else{
+          this.listProduct = res;
+          this.showError = false;
+        }
+    });
   }
 
 }

@@ -7,15 +7,10 @@
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li>
-                    <button mat-button [matMenuTriggerFor]="menu">
-                        <mat-icon>person_outline</mat-icon>
+                    <button mat-button (click)="Logout()">
+                        <mat-icon>exit_to_app</mat-icon>
                     </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="Logout()">
-                            <mat-icon>exit_to_app</mat-icon>
-                            Sign out
-                        </button>
-                    </mat-menu>  
+         
                 </li>
             </ul>
         </div>

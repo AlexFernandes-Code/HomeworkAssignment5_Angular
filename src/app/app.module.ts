@@ -12,12 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './layouts/default/default.module';
 import { RouterModule } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
-import { RegisterComponent } from './modules/register/register.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    RegisterComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

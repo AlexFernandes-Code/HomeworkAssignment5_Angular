@@ -1,1 +1,63 @@
-<p>register works!</p>
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:1000px; padding:5%">
+    <mat-card >
+    <h2 class="w3-wide"><b> Registration</b></h2>
+    <p class="w3-opacity"><i>Fill out your information below</i></p>
+    <h2 class="w3-wide"><b> Registeration successful!</b></h2>
+    <p class="w3-opacity"><i>You may now login.</i></p>
+      <form #form="ngForm">
+        <div>       
+              <mat-label>Title</mat-label>
+              <mat-select name="Title" #Title="ngModel" [(ngModel)]="formDataRegister.TitleID" required>
+                  <mat-option  *ngFor="let obj of listTitles" value="{{obj.TitleID}}">{{obj.Title1}}</mat-option>
+              </mat-select>
+        </div>
+        <div>           
+              <mat-label>Name</mat-label>
+              <input  required name="Name" #Name="ngModel" [(ngModel)]="formDataRegister.Name" matInput autocomplete="off">          
+        </div>
+        <div>        
+            <mat-label>Surname</mat-label>
+            <input required name="Surname" #Surname="ngModel" [(ngModel)]="formDataRegister.Surname" matInput autocomplete="off">   
+        </div>
+        <div>        
+              <mat-label>Date of Birth</mat-label>
+              <input name="DOB" type="date" #DOB="ngModel" [(ngModel)]="formDataRegister.DOB" matInput  required> 
+        </div>
+        <div>       
+              <mat-label>Gender</mat-label>
+              <mat-select name="Gender" #Gender="ngModel" [(ngModel)]="formDataRegister.GenderID" required>
+                  <mat-option  *ngFor="let obj of listGender" value="{{obj.GenderID}}">{{obj.Gender1}}</mat-option>
+              </mat-select>      
+        </div>
+        <span >Account Details</span>
+        <div>          
+              <mat-label>Email Address</mat-label>
+              <input name="UserEmail" #UserEmail="ngModel" [(ngModel)]="formDataRegister.UserEmail" matInput placeholder="pat@example.com" required autocomplete="off">    
+        </div>
+        <div>      
+          <mat-label>Password</mat-label>
+            <input required name="UserPassword" #UserPassword="ngModel" [(ngModel)]="formDataRegister.UserPassword" matInput>       
+    </div>
+    <div>     
+          <mat-label>Type of User</mat-label>
+          <mat-select name="TypeID" #TypeID="ngModel" [(ngModel)]="formDataRegister.TypeID" required>
+              <mat-option  *ngFor="let obj of listUserTypes" value="{{obj.TypeID}}">{{obj.TypeDescription}}</mat-option>
+          </mat-select>      
+    </div>
+    <div>
+      <button style="text-align: center; font-size: medium; margin:20px"   routerLink='/login' mat-raised-button  type="submit" >Back</button>
+      <button style="text-align: center; font-size: medium; margin:20px" mat-raised-button   [disabled]="form.invalid"  (click)="onRegister(form)" type="button"  >Register</button>
+    </div>
+    <div *ngIf="showError">
+        <h2>{{errorMessage}}</h2>
+    </div>
+    <div *ngIf="showMessage">
+        <h2>{{Message}}</h2>
+    </div>
+  </form>
+
+</mat-card>
+</div>
+
+
+

@@ -16,6 +16,10 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { ChartsModule } from 'ng2-charts';
+import { RegisterComponent } from 'src/app/modules/register/register.component';
+import { ErrorComponent } from 'src/app/modules/error/error.component';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 @NgModule({
@@ -27,8 +31,8 @@ import { ChartsModule } from 'ng2-charts';
     OrderComponent,
     SupplierComponent,
     LoginComponent,
-
-    
+    RegisterComponent,
+    ErrorComponent    
   ],
   imports: [
     CommonModule,
@@ -40,7 +44,8 @@ import { ChartsModule } from 'ng2-charts';
     FormsModule,
     MatFormFieldModule,
     MatIconModule,
-    ChartsModule
+    ChartsModule,
+    MatSelectModule
     
   ]
 })

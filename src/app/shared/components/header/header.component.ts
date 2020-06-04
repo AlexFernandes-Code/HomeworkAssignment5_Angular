@@ -14,11 +14,10 @@ export class HeaderComponent implements OnInit {
   constructor(public service: DefaultService, public route: Router) { }
 
   ngOnInit() { 
-    this.show = false;
-    if (this.service.subsVar==undefined) {
-      this.service.subsVar = this.service.
-      updateDataInvoke.subscribe((name:string) => {
-        this.update();
+      if (this.service.updateHeaderSub==undefined) {
+      this.service.updateHeaderSub = this.service.
+      updateHeaderEmitter.subscribe((name:string) => {
+        this.updateHeader();
       });
     }
   }
@@ -34,8 +33,8 @@ export class HeaderComponent implements OnInit {
     }, 300);
   }
 
-  update(){
-    if (!this.service.User){
+  updateHeader(){
+    if (!sessionStorage.getItem('accessToken')){
       this.show = false;
       this.route.navigateByUrl('login');
     }
@@ -45,9 +44,10 @@ export class HeaderComponent implements OnInit {
   }  
 
   Logout(){
-    this.service.Logout(localStorage.getItem("accessToken")).toPromise().then(value => {
+    this.service.Logout(sessionStorage.getItem("accessToken")).toPromise().then(value => {
+      sessionStorage.clear();
       localStorage.clear();
-      this.update();
+      this.updateHeader();
       this.service.sideBarOpen = false;
 
     });

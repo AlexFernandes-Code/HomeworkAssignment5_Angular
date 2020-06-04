@@ -10,17 +10,16 @@ export class DefaultGuard implements CanActivate {
 
   constructor (public service : DefaultService, public route: Router){}
 
-  canActivate() {
-    this.service.isLoggedIn(localStorage.getItem("accessTocken"));
-    if (this.service.validUser == true)
-    {
-      console.log("valid user");
-      return true;     
-    } 
-    else{
-      console.log('Please login.')
-      this.route.navigateByUrl('');
-      return false;
-    }
+  canActivate() 
+  {   
+    if (localStorage.getItem("roleID") == "2") 
+      {     
+        return true;
+      }
+    else
+      {    
+        this.route.navigate(['login']);
+        return false;
+      }       
   }
 }

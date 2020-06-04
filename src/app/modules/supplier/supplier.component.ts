@@ -12,9 +12,22 @@ export class SupplierComponent implements OnInit {
   constructor(public service: DefaultService) { }
 
   listSupplier: Supplier[];
+  showError: boolean;
+  errorMessage: string;
 
   ngOnInit(): void {
-    this.service.getSuppliers().toPromise().then(res=> this.listSupplier = res as Supplier[]);;
+    this.listSupplier = null;
+    this.service.getSuppliers(sessionStorage.getItem('accessToken')).subscribe(
+      (res: any) => {        
+        if (res.Error)  {
+          this.errorMessage = res.Error;
+          this.showError = true; 
+        }     
+        else{
+          this.listSupplier = res;
+          this.showError = false;
+        }
+    });
   }
 
 }

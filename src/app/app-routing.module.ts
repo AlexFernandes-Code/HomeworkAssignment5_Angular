@@ -9,6 +9,8 @@ import { SupplierComponent } from './modules/supplier/supplier.component';
 import { LoginComponent } from './modules/login/login.component';
 import { DefaultGuard } from './gaurds/default.guard';
 import { LoginGuard } from './gaurds/login.guard';
+import { ErrorComponent } from './modules/error/error.component';
+import { RegisterComponent } from './modules/register/register.component';
 
 
 const routes: Routes = [{
@@ -21,28 +23,39 @@ const routes: Routes = [{
   {
     path: 'login',
     component: LoginComponent,
-
+   
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'home',
-    component: DashboardComponent,   
+    component: DashboardComponent
   },
   {
     path: 'customer',
-    component: CustomerComponent
+    component: CustomerComponent,
+    canActivate: [DefaultGuard]
   },
   {
     path: 'order',
-    component: OrderComponent
+    component: OrderComponent,
   },
   {
     path: 'product',
-    component: ProductComponent
+    component: ProductComponent,
+    canActivate: [DefaultGuard]
   },
   {
     path: 'supplier',
-    component: SupplierComponent
+    component: SupplierComponent,
+    canActivate: [DefaultGuard]
   },
+  {
+    path: 'error',
+    component: ErrorComponent
+  }
 ]
 }];
 

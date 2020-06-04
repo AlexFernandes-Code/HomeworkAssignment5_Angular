@@ -16,6 +16,7 @@ export class LoginComponent  {
 
   ngOnInit()
   {  
+    this.service.User == null;
     this.resetForm();
   }
  
@@ -25,11 +26,13 @@ export class LoginComponent  {
     this.service.Login(form.value)
     .then(rez =>{     
         if (this.service.User != null){
-          localStorage.setItem('accessToken', this.service.User.GUID)
-          this.route.navigate(['home']);
-          this.service.validUser = true;
-          this.service.update();
+          sessionStorage.setItem('accessToken', this.service.User.GUID)
+          localStorage.setItem('roleID', this.service.User.TypeID.toString())
+          this.route.navigate(['home']);    
+          this.service.updateSidebar();
+          this.service.updateHeader();
           this.service.getReportData();
+          this.service.sideBarOpen = true;
         }
         else{
           console.log('Login failed');

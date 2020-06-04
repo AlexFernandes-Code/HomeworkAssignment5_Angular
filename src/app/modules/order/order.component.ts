@@ -12,9 +12,22 @@ export class OrderComponent implements OnInit {
   constructor(public service: DefaultService) { }
 
   listOrder: Order[];
+  showError: boolean;
+  errorMessage: string;
 
   ngOnInit(): void {
-    this.service.getOrders().toPromise().then(res=> this.listOrder = res as Order[]);;
+    this.listOrder = null;
+    this.service.getOrders(sessionStorage.getItem('accessToken')).subscribe(
+      (res: any) => {        
+        if (res.Error)  {
+          this.errorMessage = res.Error;
+          this.showError = true; 
+        }     
+        else{
+          this.listOrder = res;
+          this.showError = false;
+        }
+    });
   }
 
 }
