@@ -16,29 +16,43 @@ export class LoginComponent  {
 
   ngOnInit()
   {  
+    this.service.updateHeader();
+    this.service.updateSidebar();
     this.service.User == null;
     this.resetForm();
   }
- 
+
+
+  errorMessage: string;
+  Message: string;
   formDataLogin : User;
+  showError= false;
+  showMessage= false;
 
   Login(form : NgForm){
-    this.service.Login(form.value)
-    .then(rez =>{     
-        if (this.service.User != null){
+    this.service.Login(form.value).then(
+      (res: any) => {        
+        if (res.Error)  {
+          this.errorMessage = res.Error;
+          this.showError = true; 
+          this.showMessage = false;
+          setTimeout(() => {
+            this.showError = false;
+          }, 2000)
+        }     
+        else{         
+          this.Message = res.Message;
+          this.showMessage = true;
+          this.showError = false; 
           sessionStorage.setItem('accessToken', this.service.User.GUID)
-          localStorage.setItem('roleID', this.service.User.TypeID.toString())
-          this.route.navigate(['home']);    
+          localStorage.setItem('roleID', this.service.User.TypeID.toString())        
           this.service.updateSidebar();
-          this.service.updateHeader();
-          this.service.getReportData();
+          this.service.updateHeader();     
           this.service.sideBarOpen = true;
-        }
-        else{
-          console.log('Login failed');
+          this.route.navigate(['home'])
         }
     });
-  }
+    }  
 
   resetForm(form? : NgForm){
 
@@ -55,7 +69,11 @@ export class LoginComponent  {
       Surname : null,
       DOB : null,
       GenderID : null,
-      TitleID : null
+      TitleID : null,
+      Type: null,
+      Gender: null,
+      Title: null,
+      Orders: null
     }
   }
 }

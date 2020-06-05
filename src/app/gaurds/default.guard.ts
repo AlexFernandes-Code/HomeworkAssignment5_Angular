@@ -12,14 +12,26 @@ export class DefaultGuard implements CanActivate {
 
   canActivate() 
   {   
-    if (localStorage.getItem("roleID") == "2") 
-      {     
-        return true;
-      }
-    else
-      {    
-        this.route.navigate(['login']);
-        return false;
-      }       
+
+    if (sessionStorage.getItem("accessToken"))
+    {
+      if (localStorage.getItem("roleID") == "2") 
+        {     
+          return true;
+        }
+      else
+        {    
+          this.route.navigate(['error']);
+          return false;
+        }  
+    }
+    else{
+      this.service.sideBarOpen= false;
+      this.service.updateSidebar();
+      localStorage.clear();
+      this.route.navigate(['login']);
+      return false;
+    }
+     
   }
 }

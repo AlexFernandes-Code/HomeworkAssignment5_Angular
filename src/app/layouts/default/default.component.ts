@@ -8,8 +8,6 @@ import { DefaultService } from 'src/app/shared/services/default.service';
 })
 export class DefaultComponent implements OnInit {
 
-
-
   constructor(public service: DefaultService) { }
 
   ngOnInit(): void {

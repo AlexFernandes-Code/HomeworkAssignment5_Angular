@@ -19,6 +19,7 @@ import { ChartsModule } from 'ng2-charts';
 import { RegisterComponent } from 'src/app/modules/register/register.component';
 import { ErrorComponent } from 'src/app/modules/error/error.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -45,7 +46,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatIconModule,
     ChartsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatInputModule
     
   ]
 })

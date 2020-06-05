@@ -16,11 +16,14 @@ export class OrderComponent implements OnInit {
   errorMessage: string;
 
   ngOnInit(): void {
+    this.service.sideBarOpen = true;
+    this.service.updateHeader();
+    this.service.updateSidebar();
     this.listOrder = null;
     this.service.getOrders(sessionStorage.getItem('accessToken')).subscribe(
       (res: any) => {        
         if (res.Error)  {
-          this.errorMessage = res.Error;
+          this.errorMessage = res.Error; 
           this.showError = true; 
         }     
         else{

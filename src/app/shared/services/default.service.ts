@@ -11,7 +11,7 @@ import { ReportData } from '../models/report-data';
 export class DefaultService {
 
   readonly URL = "http://localhost:59623/api";
-  sideBarOpen = false;
+  sideBarOpen : boolean;
   constructor(private http: HttpClient,  public route: Router) { }
 
   getCustomers(guid: any)
@@ -40,24 +40,14 @@ export class DefaultService {
 
   Register(formDataRegister : User)
   {
-      return this.http.post(this.URL + '/Register/', formDataRegister);
+    return this.http.post(this.URL + '/Register/', formDataRegister);
   }
 
   User: User;
   Login(formDataLogin: User)
   {
-    return this.http.post<User>(this.URL + '/Login/', formDataLogin).toPromise()
+    return this.http.post(this.URL + '/Login/', formDataLogin).toPromise()
     .then(res => this.User = res as User);  
-  }
-
-  validUser: any;
-
-  isLoggedIn(guid: string)
-  {
-    let myPar = new HttpParams().set('guid',guid);
-    return this.http.get(this.URL + '/isLoggedIn/' ,{params:myPar}).toPromise()
-    .then(res => this.validUser as any)
-    .then(x => console.log("here: " + this.validUser))
   }
 
   Logout(guid)
@@ -74,14 +64,14 @@ export class DefaultService {
 
   updateSidebarEmitter = new EventEmitter();
   updateSidebarSub: Subscription;
-  updateSidebar() {
+  updateSidebar() {   
     this.updateSidebarEmitter.emit();
   }
 
-  listDefaultData : ReportData[];
-  getReportData()
+  getReportData(guid)
   {  
-    return this.http.get(this.URL + '/getReportData').toPromise().then(res=> this.listDefaultData = res as ReportData[]);
+    let myPar = new HttpParams().set('guid',guid);
+    return this.http.get(this.URL + '/getReportData',{params:myPar});
   }
 
   GetTitles(){

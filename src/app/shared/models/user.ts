@@ -1,3 +1,8 @@
+import { UserRole } from './user-role';
+import { Gender } from './gender';
+import { Title } from './title';
+import { Order } from './order';
+
 export class User {
     UserID : number;
     UserEmail : string;
@@ -10,4 +15,9 @@ export class User {
     TitleID : number;
     GenderID : number;
     TypeID : number;
+    Type: UserRole;
+    Gender: Gender;
+    Title: Title;
+    Orders: Order;
+    
 }

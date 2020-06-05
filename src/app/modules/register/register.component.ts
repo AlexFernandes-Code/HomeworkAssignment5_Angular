@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public service: DefaultService, public router: Router) { }
+  constructor(public service: DefaultService, public route: Router) { }
 
   ngOnInit()
   {
@@ -42,7 +42,11 @@ export class RegisterComponent implements OnInit {
       Surname : null,
       DOB : null,
       GenderID : null,
-      TitleID : null
+      TitleID : null,  
+      Type: null,
+      Gender: null,
+      Title: null,
+      Orders: null
     }
   }
 
@@ -51,16 +55,19 @@ export class RegisterComponent implements OnInit {
   Message: string;
   showError= false;
   showMessage= false;
-  onRegister(formReg : NgForm){
-    this.service.Register(formReg.value).subscribe(
+  onRegister(form : NgForm){
+    this.service.Register(form.value).subscribe(
       (res: any) => {        
         if (res.Error)  {
           this.errorMessage = res.Error;
           this.showError = true; 
           this.showMessage = false;
+          setTimeout(() => {
+            this.showError = false;
+          }, 2000)
         }     
         else{
-          this.router.navigate(['login'])
+          this.route.navigate(['login'])
           this.Message = res.Message;
           this.showMessage = true;
           this.showError = false; 

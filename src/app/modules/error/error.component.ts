@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DefaultService } from 'src/app/shared/services/default.service';
 
 @Component({
   selector: 'app-error',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor() { }
+  constructor(public service: DefaultService) { }
 
   ngOnInit(): void {
+    this.service.sideBarOpen = false;
+    this.service.updateSidebar();
   }
 
 }

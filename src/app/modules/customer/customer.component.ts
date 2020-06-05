@@ -18,6 +18,9 @@ export class CustomerComponent implements OnInit {
   errorMessage: string;
 
   ngOnInit(): void {
+    this.service.sideBarOpen = true;
+    this.service.updateHeader();
+    this.service.updateSidebar();
     this.listCustomer = null;
     this.service.getCustomers(sessionStorage.getItem('accessToken')).subscribe(
       (res: any) => {        

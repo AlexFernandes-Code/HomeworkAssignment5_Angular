@@ -16,6 +16,9 @@ export class ProductComponent implements OnInit {
   errorMessage: string;
 
   ngOnInit(): void {
+    this.service.sideBarOpen = true;
+    this.service.updateHeader();
+    this.service.updateSidebar();
     this.listProduct = null;
     this.service.getProducts(sessionStorage.getItem('accessToken')).subscribe(
       (res: any) => {        

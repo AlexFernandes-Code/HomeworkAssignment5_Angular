@@ -1,5 +1,5 @@
 
-<div class="container">
+<div *ngIf="!showError" class="container">
     <div *ngIf="barChartData" style="height: 100%; width: 100%;">
         <canvas id="canvas" baseChart
             [datasets]="barChartData"
@@ -12,3 +12,13 @@
     </div>
 </div>  
 
+<div *ngIf="showError" class="row">
+    <div class="col">
+        <form autocomplete="off">
+            <mat-card>
+                <h2 class="w3-wide"><b>{{errorMessage}}</b></h2>       
+                <h3 class="w3-wide"><a style="color:blue" routerLink='/login'>Click here to login</a></h3>                
+            </mat-card>
+        </form>        
+    </div>
+</div>

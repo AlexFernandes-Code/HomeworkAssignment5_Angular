@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
       this.route.navigateByUrl('login');
     }
     else {
-      this.show = true;
+      this.show = true; 
     }
   }  
 

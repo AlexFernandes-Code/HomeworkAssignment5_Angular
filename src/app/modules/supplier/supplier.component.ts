@@ -16,6 +16,9 @@ export class SupplierComponent implements OnInit {
   errorMessage: string;
 
   ngOnInit(): void {
+    this.service.sideBarOpen = true;
+    this.service.updateHeader();
+    this.service.updateSidebar();
     this.listSupplier = null;
     this.service.getSuppliers(sessionStorage.getItem('accessToken')).subscribe(
       (res: any) => {        

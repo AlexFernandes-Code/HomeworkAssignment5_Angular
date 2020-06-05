@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DefaultService } from 'src/app/shared/services/default.service';
+import { ReportData } from 'src/app/shared/models/report-data';
 
 
 @Component({
@@ -9,38 +10,54 @@ import { DefaultService } from 'src/app/shared/services/default.service';
 })
 export class DashboardComponent implements OnInit {
 
+  showError: boolean;
+  errorMessage: string;
+  listDefaultData : ReportData[];
+  
   constructor(public service: DefaultService) { 
-    this.service.getReportData().then(value=>{
-      this.barChartOptions = {
-      scales: {
-        yAxes: [
+    this.service.getReportData(sessionStorage.getItem('accessToken')).toPromise().then((value: any)=>{
+      if (value.Error)  {
+        this.errorMessage = value.Error; 
+        this.showError = true; 
+      } 
+      else{
+        this.listDefaultData = value;
+        this.showError = false; 
+        this.barChartOptions = {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
+          },
+          title: {
+            text: 'Orders',
+            display: true
+          },
+          scaleShowVerticalLines : false,
+          responsive : true
+          };
+          this.barChartLabels = this.listDefaultData.map(a=>a.ReportLabels);
+          this.barChartType = 'line';
+          this.barChartLegend = true;
+          this.barChartData = [
           {
-            ticks: {
-              beginAtZero: true
-            }
-          }
-        ]
-      },
-      title: {
-        text: 'Orders',
-        display: true
-      },
-      scaleShowVerticalLines : false,
-      responsive : true
-      };
-      this.barChartLabels = this.service.listDefaultData.map(a=>a.ReportLabels);
-      this.barChartType = 'line';
-      this.barChartLegend = true;
-      this.barChartData = [
-      {
-        data: this.service.listDefaultData.map(a=>a.ReportData),
-        label: "Orders"
-      },
-      ];
+            data: this.listDefaultData.map(a=>a.ReportData),
+            label: "Orders"
+          },];
+        }
     })
-  }
+  }    
+  
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.sideBarOpen = true;
+    this.service.updateHeader();
+    this.service.updateSidebar();
+  }
 
   public barChartOptions = {
   scales: {
