@@ -11,6 +11,7 @@ import { DefaultGuard } from './gaurds/default.guard';
 import { LoginGuard } from './gaurds/login.guard';
 import { ErrorComponent } from './modules/error/error.component';
 import { RegisterComponent } from './modules/register/register.component';
+import { EmpGuard } from './gaurds/emp.guard';
 
 
 const routes: Routes = [{
@@ -41,6 +42,7 @@ const routes: Routes = [{
   {
     path: 'order',
     component: OrderComponent,
+    canActivate: [EmpGuard]
   },
   {
     path: 'product',
